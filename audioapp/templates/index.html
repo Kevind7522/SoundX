@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>SoundX</title>
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+   {% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+
+       
+        <a class="navbar-brand">
+            <img src="{% static 'images/logo.avif' %}" width="50" height="50" class="me-2">
+            <span>Sound<span style="color: rgb(180, 58, 228);">X</span></span>
+        </a>
+
+       
+        <button class="navbar-toggler bg-light" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+       
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+          
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#home">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#products">Products</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        Pages
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">About</a></li>
+                        <li><a class="dropdown-item" href="#">Gallery</a></li>
+                        <li><a class="dropdown-item" href="#">Services</a></li>
+                        <li><a class="dropdown-item" href="#">FAQ</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#audio">Audio</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#review">Review</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+
+           
+            <a href="{% url 'login' %}" class="btn btn-login">
+               Login
+            </a>
+
+        </div>
+    </div>
+</nav>
+<section id="home">
+<div id="musicCarousel" class="carousel slide" data-bs-ride="carousel">
+
+    
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#musicCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#musicCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#musicCarousel" data-bs-slide-to="2"></button>
+    </div>
+
+
+    <div class="carousel-inner">
+
+
+        <div class="carousel-item active">
+            <img src="{% static 'images/carousel-1.jpg' %}" class="d-block w-100" alt="Music">
+
+            <div class="carousel-caption">
+                <h1>Welcome to Sound<span style="color: rgb(180, 58, 228);">X</span></h1>
+                <p>Discover premium musical instruments and accessories for every musician.</p>
+                <a href="{% url 'login' %}" class="btn btn1">Shop Now</a>
+            </div>
+        </div>
+
+  
+        <div class="carousel-item">
+            <img src="{% static 'images/carousel-2.jpg' %}" class="d-block w-100" alt="Music">
+
+            <div class="carousel-caption">
+                <h1>Find Your Perfect <span style="color: yellow;">Sound</span></h1>
+                <p>Explore guitars, keyboards, drums and professional audio equipment.</p>
+                <a href="{% url 'login' %}" class="btn btn2">Explore</a>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img src="{% static 'images/carousel-3.jpg' %}" class="d-block w-100" alt="Music">
+
+            <div class="carousel-caption">
+                <h1>Music Brings People <span style="color: rgb(6, 211, 109);">Together</span></h1>
+                <p>From beginners to professionals, we have everything you need.</p>
+                <a href="{% url 'login' %}" class="btn btn3">Learn More</a>
+            </div>
+        </div>
+
+    </div>
+
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#musicCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+
+
+    <button class="carousel-control-next" type="button" data-bs-target="#musicCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+
+</div>
+</section>
+
+<section id="products">
+    <div class="container py-5">
+
+        <h1 class="heading">Musical Instruments</h1>
+
+        <p class="lead text-muted w-75 mx-auto">
+            Discover our premium collection of musical instruments crafted for beginners, enthusiasts, and professionals.
+        </p>
+
+        <div class="row g-4">
+
+            {% for product in products %}
+
+            <div class="col-lg-3 col-md-6 mb-4">
+
+                <a href="{% url 'login' %}" class="text-decoration-none">
+
+                    <div class="card h-100">
+
+                        <img src="{{ product.image.url }}"
+                             class="card-img-top"
+                             alt="{{ product.name }}">
+
+                        <div class="card-img-overlay">
+
+                            <h4 class="card-title">
+                                {{ product.name }}
+                            </h4>
+
+                            <p class="card-text">
+                                {{ product.description }}
+                            </p>
+
+                            <h5 class="price">
+                                ₹{{ product.price }}
+                            </h5>
+
+                            <span class="btn btn-buy">
+                                Buy Now
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12 text-center">
+                <h4>No Products Available</h4>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+<section class="music-section" id="audio">
+    <div class="container">
+        <div class="row align-items-center">
+
+         
+            <div class="col-lg-6 text-center">
+                <img src="{% static 'images/audio.jpg' %}" class="instrument-img" alt="Guitar">
+            </div>
+
+         
+            <div class="col-lg-6 text-white">
+
+                <h2>Listen to the <span>Perfect Sound</span></h2>
+
+                <p>
+                    Experience the rich tones of our premium musical instruments.
+                    Click the play button below and enjoy a sample audio before you
+                    choose your favorite instrument.
+                </p>
+
+                <audio controls class="w-100">
+                    <source src="{% static 'audio/audio.mp3' %}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="review-section py-5" id="review">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <h1 class="review-heading">What Our Customers Say</h1>
+            <p class="review-text">
+                Trusted by thousands of musicians for quality instruments and excellent service.
+            </p>
+        </div>
+
+        <div class="row g-2">
+
+          
+            <div class="col-lg-4 col-md-6">
+                <div class="review-card text-center">
+                    <img src="{% static 'images/user1.jpg' %}" class="review-img" alt="Customer">
+
+                    <h4>John David</h4>
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <p>
+                        "Excellent quality guitar! The sound is amazing and the delivery was very fast. Highly recommended."
+                    </p>
+                </div>
+            </div>
+
+           
+            <div class="col-lg-4 col-md-6">
+                <div class="review-card text-center">
+                    <img src="{% static 'images/user2.jpg' %}" class="review-img" alt="Customer">
+
+                    <h4>Emma Wilson</h4>
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <p>
+                        "I bought a digital piano and it exceeded my expectations. Great customer support and affordable prices."
+                    </p>
+                </div>
+            </div>
+
+           
+            <div class="col-lg-4 col-md-6">
+                <div class="review-card text-center">
+                    <img src="{% static 'images/user3.jpg' %}" class="review-img" alt="Customer">
+
+                    <h4>Michael Smith</h4>
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <p>
+                        "Fantastic shopping experience. The drum kit arrived in perfect condition. Will definitely shop again."
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer" id="contact">
+    <div class="container">
+        <div class="row">
+
+           
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h3>Sound<span style="color:#b43ae4;">X</span></h3>
+                <p>
+                    Discover premium musical instruments, professional audio
+                    equipment, and accessories designed for beginners,
+                    enthusiasts, and professional musicians.
+                </p>
+            </div>
+
+          
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Albums</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5>Categories</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">🎸 Guitars</a></li>
+                    <li><a href="#">🎹 Keyboards</a></li>
+                    <li><a href="#">🥁 Drums</a></li>
+                    <li><a href="#">🎻 Violins</a></li>
+                    <li><a href="#">🎤 Audio Equipment</a></li>
+                </ul>
+            </div>
+
+  
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5>Contact Us</h5>
+
+                <p>📍 Marthandam, Tamil Nadu</p>
+                <p>📞 +91 98765 43210</p>
+                <p>✉ info@soundx.com</p>
+
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="text-center">
+            <p class="mb-0">
+                © 2026 <strong>SoundX</strong>. All Rights Reserved. | Designed by <strong>MTL Webking Technology Pvt. Ltd.</strong>
+            </p>
+        </div>
+
+    </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
